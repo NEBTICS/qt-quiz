@@ -1,5 +1,24 @@
 .MuiDialog-paperWidthSm {
-width:600px;
-border-radius:10px !important;
+    width: 600px;
+    border-radius: 10px !important;
 
+}
+
+.inputfields {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    min-height: 250px;
+}
+
+@media only screen and (max-width: 600px) {
+    .inputfields  {
+        justify-content: space-around;
+    }
+
+    .dialogContent {
+        flex-direction: column;
+        height: 100% !important;
+        overflow-y: scroll;
+    }
 }

@@ -2,37 +2,29 @@
 
 import React from "react";
 import "../CSS/login.css";
-import {Button,DialogTitle,TextField,DialogActions,Dialog,DialogContent} from "@material-ui/core";
+
+import {
+  Button,
+  DialogTitle,
+  TextField,
+  DialogActions,
+  Dialog,
+  DialogContent,
+} from "@material-ui/core";
 
 class Form extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      open: false,
-    };
+    this.state = {};
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
-  handleClose = () => {
-    if (
-      !this.props.name ||
-      !this.props.phone_num ||
-      !this.props.name ||
-      !this.props.address ||
-      !this.props.gender
-    ) {
-      alert("please fill all the details");
-    } else {
-      this.setState({
-        open: false,
-      });
-    }
-  };
+
   handleInputChange(e) {
     this.props.handleInputChange({
       name: e.target.name,
       value: e.target.value,
     });
   }
-
   render() {
     return (
       <div>
@@ -42,8 +34,7 @@ class Form extends React.Component {
             opacity: 1.5,
             color: "#202124",
           }}
-          open={this.state.open}
-          handleclose={this.handleClose}
+          open={this.props.login}
         >
           <DialogTitle
             style={{
@@ -58,6 +49,7 @@ class Form extends React.Component {
             Enter details for test
           </DialogTitle>
           <DialogContent
+            className="dialogContent"
             style={{
               maxWidth: "700px",
               height: "300px",
@@ -65,14 +57,7 @@ class Form extends React.Component {
               justifyContent: "space-evenly",
             }}
           >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: " space-evenly",
-                minHeight: "250px",
-              }}
-            >
+            <div className="inputfields ">
               <TextField
                 variant="outlined"
                 label="Name"
@@ -102,14 +87,7 @@ class Form extends React.Component {
               />
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: " space-evenly",
-                minHeight: "250px",
-              }}
-            >
+            <div className="inputfields ">
               <TextField
                 variant="outlined"
                 label="Email"
@@ -147,7 +125,7 @@ class Form extends React.Component {
             }}
           >
             <Button
-              onClick={this.handleClose}
+              onClick={this.props.handleClose}
               style={{ backgroundColor: "#6FCF97", color: "white" }}
             >
               Start Test
