@@ -11,7 +11,137 @@ import React, { Component } from "react";
 import "../CSS/MainPage.css";
 import QuestionTab from "./QuestionTab.js";
 import Timer from "./Timer.js";
-import { Typography } from "@material-ui/core";
+import { Typography, Button } from "@material-ui/core";
+
+var questions = [
+  {
+    id: 0,
+    question: "vchdvwciw",
+    correctanswer: "a",
+    answers: ["a", "b", "c", "d"],
+  },
+  {
+    id: 1,
+    question: "vchdvwciw",
+    correctanswer: "a",
+    answers: ["a", "b", "c", "d"],
+  },
+  {
+    id: 2,
+    question: "vchdvwciw",
+    correctanswer: "a",
+    answers: ["a", "b", "c", "d"],
+  },
+  {
+    id: 3,
+    question: "vchdvwciw",
+    correctanswer: "a",
+    answers: ["a", "b", "c", "d"],
+  },
+  {
+    id: 3,
+    question: "vchdvwciw",
+    correctanswer: "a",
+    answers: ["a", "b", "c", "d"],
+  },
+  {
+    id: 4,
+    question: "smeet",
+    correctanswer: "a",
+    answers: ["a", "b", "c", "d"],
+  },
+  {
+    id: 5,
+    question: "vchdvwciw",
+    correctanswer: "a",
+    answers: ["a", "b", "c", "d"],
+  },
+  {
+    id: 6,
+    question: "vchdvwciw",
+    correctanswer: "a",
+    answers: ["a", "b", "c", "d"],
+  },
+  {
+    id: 7,
+    question: "vchdvwciw",
+    correctanswer: "a",
+    answers: ["a", "b", "c", "d"],
+  },
+  {
+    id: 8,
+    question: "vchdvwciw",
+    correctanswer: "a",
+    answers: ["a", "b", "c", "d"],
+  },
+  {
+    id: 9,
+    question: "vchdvwciw",
+    correctanswer: "a",
+    answers: ["a", "b", "c", "d"],
+  },
+  {
+    id: 10,
+    question: "vchdvwciw",
+    correctanswer: "a",
+    answers: ["a", "b", "c", "d"],
+  },
+  {
+    id: 11,
+    question: "vchdvwciw",
+    correctanswer: "a",
+    answers: ["a", "b", "c", "d"],
+  },
+  {
+    id: 12,
+    question: "vchdvwciw",
+    correctanswer: "a",
+    answers: ["a", "b", "c", "d"],
+  },
+  {
+    id: 13,
+    question: "vchdvwciw",
+    correctanswer: "a",
+    answers: ["a", "b", "c", "d"],
+  },
+  {
+    id: 14,
+    question: "vchdvwciw",
+    correctanswer: "a",
+    answers: ["a", "b", "c", "d"],
+  },
+  {
+    id: 15,
+    question: "vchdvwciw",
+    correctanswer: "a",
+    answers: ["a", "b", "c", "d"],
+  },
+  {
+    id: 16,
+    question: "vchdvwciw",
+    correctanswer: "a",
+    answers: ["a", "b", "c", "d"],
+  },
+  {
+    id: 17,
+    question: "vchdvwciw",
+    correctanswer: "a",
+    answers: ["a", "b", "c", "d"],
+  },
+  {
+    id: 18,
+    question: "vchdvwciw",
+    correctanswer: "a",
+    answers: ["a", "b", "c", "d"],
+  },
+  {
+    id: 19,
+    question: "vchdvwciw",
+    correctanswer: "a",
+    answers: ["a", "b", "c", "d"],
+    endquiz: false,
+  },
+];
 
 class MainPage extends Component {
   constructor(props) {
@@ -19,9 +149,13 @@ class MainPage extends Component {
     this.state = {
       minutes: 30,
       seconds: 0,
-      currentAnswer: 0,
+      currentAnswer: "",
+      currentquestionid: 0,
+      answers: [],
+      endQuiz: false,
     };
     this.handleAnswerChange = this.handleAnswerChange.bind(this);
+    this.handleNext = this.handleNext.bind(this);
   }
   componentDidMount() {
     this.myInterval = setInterval(() => {
@@ -60,6 +194,28 @@ class MainPage extends Component {
       currentAnswer: ans,
     });
   }
+  handleNext(e) {
+    console.log(e.currentTarget.value);
+    if (e.currentTarget.value === "next" && this.state.currentAnswer === "") {
+      alert("Please select one of the option");
+    } else {
+      var ans = this.state.answers;
+      ans.push({
+        ans: this.state.currentAnswer,
+        questionid: this.state.currentquestionid,
+      });
+      this.setState({
+        currentquestionid: (this.state.currentquestionid += 1),
+      });
+      console.log(ans);
+    }
+  }
+  handleSubmit() {
+    console.log("Submit btn was pressed");
+    this.setState({
+      endQuiz: !this.state.endQuiz,
+    });
+  }
 
   render() {
     return (
@@ -69,15 +225,50 @@ class MainPage extends Component {
         </div>
         <div className="tabs">
           <QuestionTab
-            question={{
-              question:
-                "1.  If x = np.linspace(-pi, pi, 200) and y = np.sin(2x),what is the correct code to plot y v/s x?",
-              answers: ["a", "b", "c", "d"],
-            }}
+            question={questions[this.state.currentquestionid]}
             handleAnswerChange={this.handleAnswerChange}
           />
           <Timer minutes={this.state.minutes} seconds={this.state.seconds} />
         </div>
+        {this.state.currentquestionid == 19 ? (
+          <Button
+            style={{ float: "right", background: "#6FCF97", color: "#fff" }}
+            variant="contained"
+            onClick={this.handleSubmit}
+          >
+            Submit
+          </Button>
+        ) : (
+          <div
+            style={{
+              marginTop: "100px",
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
+          >
+            <Button
+              style={{ background: "#EB5757", color: "#fff" }}
+              variant="contained"
+              onClick={(e) => this.handleNext(e)}
+              value="skip"
+            >
+              Skip
+            </Button>
+            <Button
+              style={{
+                float: "right",
+                background: "#6FCF97",
+                margin: "0 0 0 20px",
+                color: "#fff",
+              }}
+              variant="contained"
+              onClick={(e) => this.handleNext(e)}
+              value="next"
+            >
+              Next
+            </Button>
+          </div>
+        )}
       </div>
     );
   }

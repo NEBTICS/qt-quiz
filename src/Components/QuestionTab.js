@@ -17,13 +17,14 @@ class QuestionTab extends Component {
     this.handleRadioChange = this.handleRadioChange.bind(this);
   }
   handleRadioChange(e) {
-    console.log(e.target.value);
     this.props.handleAnswerChange(e.target.value);
   }
   render() {
     return (
       <div>
-        <div className="question">{this.props.question.question}</div>
+        <div className="question">
+          {this.props.question.id + 1 + "."} {this.props.question.question}
+        </div>
 
         <form className="questionForm">
           <FormControl
