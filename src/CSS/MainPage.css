@@ -1,17 +1,16 @@
 .mainPage {
-    height: 100%;
-    background-color: #202124;
-    padding: 20px
+  height: 100%;
+  background-color: #202124;
+  padding: 20px;
 }
 
 .mainText {
-    color: #6FCF97;
-    display: flex;
-    justify-content: center;
+  color: #6fcf97;
+  display: flex;
+  justify-content: center;
 }
 
 .tabs {
-
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
