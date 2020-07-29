@@ -11,6 +11,7 @@ import React, { Component } from "react";
 import "../CSS/MainPage.css";
 import QuestionTab from "./QuestionTab.js";
 import Timer from "./Timer.js";
+import Login from "./Login";
 
 import {
   Button,
@@ -20,7 +21,6 @@ import {
   DialogContent,
   Typography,
 } from "@material-ui/core";
-
 
 var questions = [
   {
@@ -39,29 +39,23 @@ var questions = [
     id: 2,
     question: "vchdvwciw",
     correctanswer: "a",
-    answers: ["a", "b", "c", "d"],
+    answers: ["e", "f", "g", "h"],
   },
   {
     id: 3,
     question: "vchdvwciw",
     correctanswer: "a",
-    answers: ["a", "b", "c", "d"],
-  },
-  {
-    id: 3,
-    question: "vchdvwciw",
-    correctanswer: "a",
-    answers: ["a", "b", "c", "d"],
+    answers: ["1", "2", "3", "4"],
   },
   {
     id: 4,
-    question: "smeet",
+    question: "vchdvwciw",
     correctanswer: "a",
     answers: ["a", "b", "c", "d"],
   },
   {
     id: 5,
-    question: "vchdvwciw",
+    question: "smeet",
     correctanswer: "a",
     answers: ["a", "b", "c", "d"],
   },
@@ -148,8 +142,8 @@ var questions = [
     question: "vchdvwciw",
     correctanswer: "a",
     answers: ["a", "b", "c", "d"],
-    endquiz: false,
   },
+  
 ];
 
 class MainPage extends Component {
@@ -165,6 +159,8 @@ class MainPage extends Component {
     };
     this.handleAnswerChange = this.handleAnswerChange.bind(this);
     this.handleNext = this.handleNext.bind(this);
+    this.handleResetTimer = this.handleResetTimer.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
     this.myInterval = setInterval(() => {
@@ -181,6 +177,7 @@ class MainPage extends Component {
           seconds: "0" + seconds,
         }));
       }
+     
       if (seconds === "00") {
         if (minutes === 0) {
           clearInterval(this.myInterval);
@@ -194,11 +191,20 @@ class MainPage extends Component {
           }));
         }
       }
-    }, 1000);
+    }, 10);
   }
 
   componentWillUnmount() {
     clearInterval(this.myInterval);
+  }
+  handleResetTimer() {
+    console.log("reset");
+
+    this.setState({
+      minutes: 30,
+      seconds: 0,
+    });
+    this.props.handleClose();
   }
 
   handleAnswerChange(ans) {
@@ -217,7 +223,8 @@ class MainPage extends Component {
         questionid: this.state.currentquestionid,
       });
       this.setState({
-        currentquestionid: (this.state.currentquestionid += 1),
+        currentquestionid: this.state.currentquestionid + 1,
+        currentAnswer: "",
       });
       console.log(ans);
     }
@@ -225,7 +232,7 @@ class MainPage extends Component {
   handleSubmit() {
     console.log("Submit btn was pressed");
     this.setState({
-      endQuiz: !this.state.endQuiz,
+      endQuiz: true,
     });
   }
 
@@ -244,7 +251,7 @@ class MainPage extends Component {
         </div>
         <Dialog
           style={{
-            backgroundColor: "rgba(0, 0, 0, 0.9)",
+            backgroundColor: "rgba(0, 0, 0, 0.95)",
             opacity: 1.5,
             color: "#202124",
           }}
@@ -260,16 +267,16 @@ class MainPage extends Component {
               fontWeight: "800",
               paddingBottom: "0",
             }}
-          >{
-            this.state.minutes===0&&this.state.seconds===0?"All the best for future":"Time's Up..!!"
-          }
-            
+          >
+            {this.state.minutes === 0 && this.state.seconds === "000"
+              ? "Time's Up..!!"
+              : "Well Done..!!"}
           </DialogTitle>
           <DialogContent
             style={{
               display: "flex",
               justifyContent: "center",
-              color:"#6FCF97"
+              color: "#6FCF97",
             }}
           >
             <Typography variant="h6">Thanks for participating </Typography>
@@ -290,7 +297,7 @@ class MainPage extends Component {
           </DialogActions>
         </Dialog>
 
-        {this.state.currentquestionid == 19 ? (
+        {this.state.currentquestionid === 19 ? (
           <Button
             style={{ float: "right", background: "#6FCF97", color: "#fff" }}
             variant="contained"
@@ -329,6 +336,17 @@ class MainPage extends Component {
             </Button>
           </div>
         )}
+        <Login
+          name={this.props.name}
+          email={this.props.email}
+          phone_num={this.props.phone_num}
+          parent_num={this.props.parent_num}
+          address={this.props.address}
+          gender={this.props.gender}
+          login={this.props.login}
+          handleInputChange={this.props.handleInputChange}
+          handleClose={this.handleResetTimer}
+        />
       </div>
     );
   }
