@@ -11,7 +11,15 @@ import React, { Component } from "react";
 import "../CSS/MainPage.css";
 import QuestionTab from "./QuestionTab.js";
 import Timer from "./Timer.js";
-import { Typography } from "@material-ui/core";
+
+import {
+  Button,
+  DialogTitle,
+  DialogActions,
+  Dialog,
+  DialogContent,
+  Typography,
+} from "@material-ui/core";
 
 class MainPage extends Component {
   constructor(props) {
@@ -20,6 +28,7 @@ class MainPage extends Component {
       minutes: 30,
       seconds: 0,
       currentAnswer: 0,
+      endQuiz: false,
     };
     this.handleAnswerChange = this.handleAnswerChange.bind(this);
   }
@@ -41,6 +50,9 @@ class MainPage extends Component {
       if (seconds === "00") {
         if (minutes === 0) {
           clearInterval(this.myInterval);
+          this.setState({
+            endQuiz: true,
+          });
         } else {
           this.setState(({ minutes }) => ({
             minutes: minutes - 1,
@@ -78,6 +90,53 @@ class MainPage extends Component {
           />
           <Timer minutes={this.state.minutes} seconds={this.state.seconds} />
         </div>
+        <Dialog
+          style={{
+            backgroundColor: "rgba(0, 0, 0, 0.9)",
+            opacity: 1.5,
+            color: "#202124",
+          }}
+          open={this.state.endQuiz}
+          // handleclose={this.handleClose}
+        >
+          <DialogTitle
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              color: "#EB5757",
+              fontWeight: "800",
+              paddingBottom: "0",
+            }}
+          >{
+            this.state.minutes===0&&this.state.seconds===0?"All the best for future":"Time's Up..!!"
+          }
+            
+          </DialogTitle>
+          <DialogContent
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              color:"#6FCF97"
+            }}
+          >
+            <Typography variant="h6">Thanks for participating </Typography>
+          </DialogContent>
+          <DialogActions
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              padding: "20px 0",
+            }}
+          >
+            <Button
+              onClick={this.handleClose}
+              style={{ backgroundColor: "#EB5757", color: "white" }}
+            >
+              End Test
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     );
   }
