@@ -16,6 +16,7 @@ class App extends Component {
       address: "",
       gender: "",
       login: true,
+      details: [],
     };
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -26,7 +27,6 @@ class App extends Component {
     });
   }
   handleClose = () => {
-   
     if (
       !this.state.name ||
       !this.state.phone_num ||
@@ -53,6 +53,8 @@ class App extends Component {
           address={this.state.address}
           gender={this.state.gender}
           login={this.state.login}
+          score={this.state.marks}
+          detail={this.state.details}
           handleInputChange={this.handleInputChange}
           handleClose={this.handleClose}
         />

@@ -25,49 +25,53 @@ import {
 var questions = [
   {
     id: 0,
-    question: "vchdvwciw",
-    correctanswer: "a",
-    answers: ["a", "b", "c", "d"],
+    question: "For what value of 't' is X= 2/3 a solution of 7X^2 + tX - 3",
+    correctanswer: "",
+    answers: ["-6", "-1/6", "1/6", "6"],
   },
   {
     id: 1,
-    question: "vchdvwciw",
+    question:
+      "If PA and PB tangents, From P to a circle with center O. If Angle AOB = 130 deg then find Angle APB ",
     correctanswer: "a",
-    answers: ["a", "b", "c", "d"],
+    answers: ["40 deg", "55 deg", "50 deg", "60 deg"],
   },
   {
     id: 2,
-    question: "vchdvwciw",
-    correctanswer: "a",
-    answers: ["e", "f", "g", "h"],
+    question:
+      "If 7th and 13th terms are 34 & 64 respectively, then its 18th term is  ",
+    correctanswer: "",
+    answers: ["87", "88", "89", "91"],
   },
   {
     id: 3,
-    question: "vchdvwciw",
-    correctanswer: "a",
-    answers: ["1", "2", "3", "4"],
+    question:
+      "The probability of a leap year selected at random contain 53 sundays is ",
+    correctanswer: "",
+    answers: ["1/7", "53/366", "2/7", "53/365"],
   },
   {
     id: 4,
-    question: "vchdvwciw",
-    correctanswer: "a",
+    question: "Sin^2 60 + 2Tan^ 45 - cos^2 30",
+    correctanswer: "",
     answers: ["a", "b", "c", "d"],
   },
   {
     id: 5,
-    question: "smeet",
+    question: "What is the area of semi-circle of raduis 5cm ?",
     correctanswer: "a",
-    answers: ["a", "b", "c", "d"],
+    answers: ["78.cm", "71.42cm", "63.18cm", "79.86cm"],
   },
   {
     id: 6,
-    question: "vchdvwciw",
-    correctanswer: "a",
-    answers: ["a", "b", "c", "d"],
+    question:
+      "If X = a, Y = b is the solution of the pair of equation X - Y = 2 and X + Y = 4 then what will be value of a & b  ",
+    correctanswer: "",
+    answers: ["2,1", "3,1", "4,6", "1,2"],
   },
   {
     id: 7,
-    question: "vchdvwciw",
+    question: "07",
     correctanswer: "a",
     answers: ["a", "b", "c", "d"],
   },
@@ -143,7 +147,6 @@ var questions = [
     correctanswer: "a",
     answers: ["a", "b", "c", "d"],
   },
-  
 ];
 
 class MainPage extends Component {
@@ -154,6 +157,7 @@ class MainPage extends Component {
       seconds: 0,
       currentAnswer: "",
       currentquestionid: 0,
+      marks: 0,
       answers: [],
       endQuiz: false,
     };
@@ -161,6 +165,7 @@ class MainPage extends Component {
     this.handleNext = this.handleNext.bind(this);
     this.handleResetTimer = this.handleResetTimer.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleShuffleArray = this.handleShuffleArray.bind(this);
   }
   componentDidMount() {
     this.myInterval = setInterval(() => {
@@ -177,7 +182,7 @@ class MainPage extends Component {
           seconds: "0" + seconds,
         }));
       }
-     
+
       if (seconds === "00") {
         if (minutes === 0) {
           clearInterval(this.myInterval);
@@ -191,20 +196,29 @@ class MainPage extends Component {
           }));
         }
       }
-    }, 10);
+    }, 1000);
   }
 
   componentWillUnmount() {
     clearInterval(this.myInterval);
   }
-  handleResetTimer() {
-    console.log("reset");
+
+  handleResetTimer(questions) {
+    // let i = questions.length - 1;
+    // for (i; i > 0; i--) {
+    //   const j = Math.floor(Math.random() * (i + 1));
+    //   const temp = questions[i];
+    //   questions[i] = questions[j];
+    //   questions[j] = temp;
+    // }
+    console.log(questions);
 
     this.setState({
       minutes: 30,
       seconds: 0,
     });
     this.props.handleClose();
+    // return questions;
   }
 
   handleAnswerChange(ans) {
@@ -212,6 +226,11 @@ class MainPage extends Component {
       currentAnswer: ans,
     });
   }
+
+  handleScore() {
+    this.setState({});
+  }
+
   handleNext(e) {
     console.log(e.currentTarget.value);
     if (e.currentTarget.value === "next" && this.state.currentAnswer === "") {
@@ -246,6 +265,7 @@ class MainPage extends Component {
           <QuestionTab
             question={questions[this.state.currentquestionid]}
             handleAnswerChange={this.handleAnswerChange}
+            handleScore={this.handleScore}
           />
           <Timer minutes={this.state.minutes} seconds={this.state.seconds} />
         </div>
@@ -346,6 +366,7 @@ class MainPage extends Component {
           login={this.props.login}
           handleInputChange={this.props.handleInputChange}
           handleClose={this.handleResetTimer}
+          // shuffleArray={this.handleShuffleArray}
         />
       </div>
     );
