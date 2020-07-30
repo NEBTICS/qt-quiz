@@ -12,6 +12,7 @@ import "../CSS/MainPage.css";
 import QuestionTab from "./QuestionTab.js";
 import Timer from "./Timer.js";
 import Login from "./Login";
+import Datadetail from "./DataDetail.js";
 
 import {
   Button,
@@ -21,7 +22,6 @@ import {
   DialogContent,
   Typography,
 } from "@material-ui/core";
-
 var questions = [
   {
     id: 0,
@@ -178,6 +178,7 @@ class MainPage extends Component {
       marks: 0,
       answers: [],
       endQuiz: false,
+      admin:true
     };
     this.handleAnswerChange = this.handleAnswerChange.bind(this);
     this.handleNext = this.handleNext.bind(this);
@@ -282,99 +283,82 @@ class MainPage extends Component {
   render() {
     return (
       <div className="mainPage">
-        <div className="mainText">
-          <Typography variant="h6">Scholarship Test</Typography>
-        </div>
-        <div className="tabs">
-          <QuestionTab
-            question={questions[this.state.currentquestionid]}
-            handleAnswerChange={this.handleAnswerChange}
-          />
-          <Timer minutes={this.state.minutes} seconds={this.state.seconds} />
-        </div>
-        <Dialog
-          style={{
-            backgroundColor: "rgba(0, 0, 0, 0.95)",
-            opacity: 1.5,
-            color: "#202124",
-          }}
-          open={this.state.endQuiz}
-          // handleclose={this.handleClose}
-        >
-          <DialogTitle
+        <div style={{display:`${this.state.admin?"none":"block"}`}}>
+          <div className="mainText">
+            <Typography variant="h6">Scholarship Test</Typography>
+          </div>
+          <div className="tabs">
+            <QuestionTab
+              question={questions[this.state.currentquestionid]}
+              handleAnswerChange={this.handleAnswerChange}
+            />
+            <Timer minutes={this.state.minutes} seconds={this.state.seconds} />
+          </div>
+          <Dialog
             style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              color: "#EB5757",
-              fontWeight: "800",
-              paddingBottom: "0",
+              backgroundColor: "rgba(0, 0, 0, 0.95)",
+              opacity: 1.5,
+              color: "#202124",
             }}
+            open={this.state.endQuiz}
+            // handleclose={this.handleClose}
           >
-            {this.state.minutes === 0 && this.state.seconds === "000"
-              ? "Time's Up..!!"
-              : "Well Done..!!"}
-          </DialogTitle>
-          <DialogContent
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              color: "#6FCF97",
-            }}
-          >
-            <Typography variant="h6">Thanks for participating </Typography>
-          </DialogContent>
-          <DialogActions
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              padding: "20px 0",
-            }}
-          >
-            <Button
-              onClick={this.handleClose}
-              style={{ backgroundColor: "#EB5757", color: "white" }}
-            >
-              End Test
-            </Button>
-          </DialogActions>
-        </Dialog>
-
-        {this.state.currentquestionid === 19 ? (
-          <Button
-            style={{ float: "right", background: "#6FCF97", color: "#fff" }}
-            variant="contained"
-            onClick={this.handleSubmit}
-          >
-            Submit
-          </Button>
-        ) : (
-          <div
-            style={{
-              marginTop: "100px",
-              display: "flex",
-              justifyContent: "flex-end",
-            }}
-          >
-            <Button
-              style={{ background: "#EB5757", color: "#fff" }}
-              variant="contained"
-              onClick={(e) => this.handleNext(e)}
-              value="skip"
-            >
-              Skip
-            </Button>
-            <Button
+            <DialogTitle
               style={{
-                float: "right",
-                background: "#6FCF97",
-                margin: "0 0 0 20px",
-                color: "#fff",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                color: "#EB5757",
+                fontWeight: "800",
+                paddingBottom: "0",
               }}
-              variant="contained"
-              onClick={(e) => this.handleNext(e)}
-              value="next"
             >
+              {this.state.minutes === 0 && this.state.seconds === "000"
+                ? "Time's Up..!!"
+                : "Well Done..!!"}
+            </DialogTitle>
+            <DialogContent
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                color: "#6FCF97",
+              }}
+            >
+              <Typography variant="h6">Thanks for participating </Typography>
+            </DialogContent>
+            <DialogActions
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                padding: "20px 0",
+              }}
+            >
+              <Button
+                onClick={this.handleClose}
+                style={{ backgroundColor: "#EB5757", color: "white" }}
+              >
+                End Test
+              </Button>
+            </DialogActions>
+          </Dialog>
+
+          {this.state.currentquestionid === 19 ? (
+            <Button
+              style={{ float: "right", background: "#6FCF97", color: "#fff" }}
+              variant="contained"
+              onClick={this.handleSubmit}
+            >
+              Submit
+            </Button>
+          ) : (
+            <div
+              style={{
+                marginTop: "100px",
+                display: "flex",
+                justifyContent: "flex-end",
+              }}
+            >
+<<<<<<< HEAD
               Next
             </Button>
           </div>
@@ -391,6 +375,48 @@ class MainPage extends Component {
           handleClose={this.handleResetTimer}
           // shuffleArray={this.handleShuffleArray}
         />
+=======
+              <Button
+                style={{ background: "#EB5757", color: "#fff" }}
+                variant="contained"
+                onClick={(e) => this.handleNext(e)}
+                value="skip"
+              >
+                Skip
+              </Button>
+              <Button
+                style={{
+                  float: "right",
+                  background: "#6FCF97",
+                  margin: "0 0 0 20px",
+                  color: "#fff",
+                }}
+                variant="contained"
+                onClick={(e) => this.handleNext(e)}
+                value="next"
+              >
+                Next
+              </Button>
+            </div>
+          )}
+          <Login
+            name={this.props.name}
+            email={this.props.email}
+            phone_num={this.props.phone_num}
+            parent_num={this.props.parent_num}
+            address={this.props.address}
+            gender={this.props.gender}
+            login={this.props.login}
+            handleInputChange={this.props.handleInputChange}
+            handleClose={this.handleResetTimer}
+          />
+        </div>
+        <div style={{display:`${!this.state.admin?"none":"block"}`}} >
+        <Datadetail />
+        </div>
+      
+
+>>>>>>> d107c88e2a513824b6fdf420f78c4f08cb48e1b1
       </div>
     );
   }

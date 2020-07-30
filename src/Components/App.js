@@ -15,8 +15,12 @@ class App extends Component {
       parent_num: "",
       address: "",
       gender: "",
+<<<<<<< HEAD
       login: true,
       details: [],
+=======
+      login: false,
+>>>>>>> d107c88e2a513824b6fdf420f78c4f08cb48e1b1
     };
     this.handleInputChange = this.handleInputChange.bind(this);
   }
