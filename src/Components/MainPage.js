@@ -178,7 +178,7 @@ class MainPage extends Component {
       marks: 0,
       answers: [],
       endQuiz: false,
-      admin:true
+      admin: true,
     };
     this.handleAnswerChange = this.handleAnswerChange.bind(this);
     this.handleNext = this.handleNext.bind(this);
@@ -283,7 +283,7 @@ class MainPage extends Component {
   render() {
     return (
       <div className="mainPage">
-        <div style={{display:`${this.state.admin?"none":"block"}`}}>
+        <div style={{ display: `${this.state.admin ? "none" : "block"}` }}>
           <div className="mainText">
             <Typography variant="h6">Scholarship Test</Typography>
           </div>
@@ -358,24 +358,6 @@ class MainPage extends Component {
                 justifyContent: "flex-end",
               }}
             >
-<<<<<<< HEAD
-              Next
-            </Button>
-          </div>
-        )}
-        <Login
-          name={this.props.name}
-          email={this.props.email}
-          phone_num={this.props.phone_num}
-          parent_num={this.props.parent_num}
-          address={this.props.address}
-          gender={this.props.gender}
-          login={this.props.login}
-          handleInputChange={this.props.handleInputChange}
-          handleClose={this.handleResetTimer}
-          // shuffleArray={this.handleShuffleArray}
-        />
-=======
               <Button
                 style={{ background: "#EB5757", color: "#fff" }}
                 variant="contained"
@@ -411,12 +393,9 @@ class MainPage extends Component {
             handleClose={this.handleResetTimer}
           />
         </div>
-        <div style={{display:`${!this.state.admin?"none":"block"}`}} >
-        <Datadetail />
+        <div style={{ display: `${!this.state.admin ? "none" : "block"}` }}>
+          <Datadetail />
         </div>
-      
-
->>>>>>> d107c88e2a513824b6fdf420f78c4f08cb48e1b1
       </div>
     );
   }
