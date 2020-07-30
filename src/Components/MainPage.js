@@ -33,7 +33,7 @@ var questions = [
     id: 1,
     question:
       "If PA and PB tangents, From P to a circle with center O. If Angle AOB = 130 deg then find Angle APB ",
-    correctanswer: "a",
+    correctanswer: "40 deg",
     answers: ["40 deg", "55 deg", "50 deg", "60 deg"],
   },
   {
@@ -71,81 +71,99 @@ var questions = [
   },
   {
     id: 7,
-    question: "07",
-    correctanswer: "a",
-    answers: ["a", "b", "c", "d"],
+    question:
+      "What is the natur of the root of quadratic equation 2X^2 + 4X = 5 ",
+    correctanswer: "",
+    answers: ["Real & equal", "Real & unequal", "Not real"],
   },
   {
     id: 8,
-    question: "vchdvwciw",
-    correctanswer: "a",
-    answers: ["a", "b", "c", "d"],
+    question:
+      "Hypotenuse is 25 cm ,with the base being 7 cm .What is the height of the triangle?",
+    correctanswer: "",
+    answers: ["20cm", "22cm", "24cm", "21cm"],
   },
   {
     id: 9,
-    question: "vchdvwciw",
-    correctanswer: "a",
-    answers: ["a", "b", "c", "d"],
+    question: "The points lies on which axis (2,-3) , (0,-4)",
+    correctanswer: "",
+    answers: ["I", "II", "III", "IV"],
   },
   {
     id: 10,
-    question: "vchdvwciw",
-    correctanswer: "a",
-    answers: ["a", "b", "c", "d"],
+    question: "Oxidation is a process which involves",
+    correctanswer: "Addition of oxygen",
+    answers: [
+      "Addition of oxygen",
+      "Addition of hydrogen",
+      "Removal of oxygen",
+      " Removal of hydrogen",
+    ],
   },
   {
     id: 11,
-    question: "vchdvwciw",
-    correctanswer: "a",
-    answers: ["a", "b", "c", "d"],
+    question: "Tomato is a natural source of which acid",
+    correctanswer: "Citric Acid",
+    answers: ["Acetic Acid", "Citric Acid", "Tartaric Acid", "Oxalic Acid"],
   },
   {
     id: 12,
-    question: "vchdvwciw",
-    correctanswer: "a",
-    answers: ["a", "b", "c", "d"],
+    question: "The poorest conductor of heat among metals is",
+    correctanswer: "Lead",
+    answers: ["Lead", "Mercury", "Calcium", "Sodium"],
   },
   {
     id: 13,
-    question: "vchdvwciw",
-    correctanswer: "a",
-    answers: ["a", "b", "c", "d"],
+    question: "Name the functional group present in CH₃COCH₃",
+    correctanswer: "Ketone",
+    answers: ["Alcohol", "Carboxylic Acid", "Ketone", "Aldehyde"],
   },
   {
     id: 14,
-    question: "vchdvwciw",
-    correctanswer: "a",
-    answers: ["a", "b", "c", "d"],
+    question: "Newlands relation is called",
+    correctanswer: "Law of Octaves",
+    answers: [
+      "Musical Law",
+      "Law of Octaves",
+      "Periodic Law",
+      "Atomic Mass Law",
+    ],
   },
   {
     id: 15,
-    question: "vchdvwciw",
-    correctanswer: "a",
-    answers: ["a", "b", "c", "d"],
+    question: "Magnifying power of concave lens is ",
+    correctanswer: "Always less than 1",
+    answers: [
+      "Always greater than 1",
+      "Always less than 1",
+      "Equal to 1",
+      "Any Value",
+    ],
   },
   {
     id: 16,
-    question: "vchdvwciw",
-    correctanswer: "a",
-    answers: ["a", "b", "c", "d"],
+    question:
+      "The splitting of white light into different colours on passing through a prism is",
+    correctanswer: "Dispersion",
+    answers: ["Reflection", "Refraction", "Dispersion", "Deviation"],
   },
   {
     id: 17,
-    question: "vchdvwciw",
-    correctanswer: "a",
-    answers: ["a", "b", "c", "d"],
+    question: "Coulomb is the SI unit of",
+    correctanswer: "Charge",
+    answers: ["Charge", "Current", "Potential Difference", "Resistance"],
   },
   {
     id: 18,
-    question: "vchdvwciw",
-    correctanswer: "a",
-    answers: ["a", "b", "c", "d"],
+    question: "The magnetic field is strongest at  ",
+    correctanswer: "North Pole",
+    answers: ["Middle of Magnet", "North Pole", "South Pole", "Both Pole"],
   },
   {
     id: 19,
-    question: "vchdvwciw",
-    correctanswer: "a",
-    answers: ["a", "b", "c", "d"],
+    question: "The variety of coal which has highest (coal) carbon content ",
+    correctanswer: "Anthracite",
+    answers: ["Anthracite", "Peat", "Bituminous", "Lignite"],
   },
 ];
 
@@ -165,7 +183,7 @@ class MainPage extends Component {
     this.handleNext = this.handleNext.bind(this);
     this.handleResetTimer = this.handleResetTimer.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleShuffleArray = this.handleShuffleArray.bind(this);
+    this.handleScore = this.handleScore.bind(this);
   }
   componentDidMount() {
     this.myInterval = setInterval(() => {
@@ -228,7 +246,12 @@ class MainPage extends Component {
   }
 
   handleScore() {
-    this.setState({});
+    if (this.state.currentAnswer === questions.correctanswer) {
+      this.setState({
+        marks: this.state.marks + 1,
+      });
+      console.log(this.state.marks);
+    }
   }
 
   handleNext(e) {
@@ -246,6 +269,7 @@ class MainPage extends Component {
         currentAnswer: "",
       });
       console.log(ans);
+      this.handleScore();
     }
   }
   handleSubmit() {
@@ -265,7 +289,6 @@ class MainPage extends Component {
           <QuestionTab
             question={questions[this.state.currentquestionid]}
             handleAnswerChange={this.handleAnswerChange}
-            handleScore={this.handleScore}
           />
           <Timer minutes={this.state.minutes} seconds={this.state.seconds} />
         </div>
