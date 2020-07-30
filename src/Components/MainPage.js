@@ -32,9 +32,9 @@ var questions = [
   {
     id: 1,
     question:
-      "If PA and PB tangents, From P to a circle with center O. If Angle AOB = 130 deg then find Angle APB ",
-    correctanswer: "40 deg",
-    answers: ["40 deg", "55 deg", "50 deg", "60 deg"],
+      "If PA and PB tangents, From P to a circle with center O. If ∠AOB = 130° deg then find ∠APB ",
+    correctanswer: "40°",
+    answers: ["40°", "55°", "50°", "60°"],
   },
   {
     id: 2,
@@ -52,7 +52,7 @@ var questions = [
   },
   {
     id: 4,
-    question: "Sin^2 60 + 2Tan^ 45 - cos^2 30",
+    question: "Sin^2 60° + 2Tan^2 45° - cos^2 30°",
     correctanswer: "",
     answers: ["a", "b", "c", "d"],
   },

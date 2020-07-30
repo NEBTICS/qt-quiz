@@ -27,9 +27,10 @@ class QuestionTab extends Component {
         <div className="question">
           {this.props.questionNo + "."}
           {this.props.question.question}
-          {shuffleQuestions.map((question) => {
+          {this.props.question.question}
+          {/* {shuffleQuestions.map((question) => {
             return <Typography variant="h6">{question.question}</Typography>;
-          })}
+          })} */}
         </div>
 
         <form className="questionForm">
