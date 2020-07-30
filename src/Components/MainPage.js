@@ -174,17 +174,19 @@ class MainPage extends Component {
       minutes: 30,
       seconds: 0,
       currentAnswer: "",
+      questionNo: 1,
       currentquestionid: 0,
       marks: 0,
       answers: [],
       endQuiz: false,
-      admin: true,
+      admin: false,
     };
     this.handleAnswerChange = this.handleAnswerChange.bind(this);
     this.handleNext = this.handleNext.bind(this);
     this.handleResetTimer = this.handleResetTimer.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleScore = this.handleScore.bind(this);
+    this.ShuffleArray = this.ShuffleArray.bind(this);
   }
   componentDidMount() {
     this.myInterval = setInterval(() => {
@@ -223,13 +225,6 @@ class MainPage extends Component {
   }
 
   handleResetTimer(questions) {
-    // let i = questions.length - 1;
-    // for (i; i > 0; i--) {
-    //   const j = Math.floor(Math.random() * (i + 1));
-    //   const temp = questions[i];
-    //   questions[i] = questions[j];
-    //   questions[j] = temp;
-    // }
     console.log(questions);
 
     this.setState({
@@ -238,6 +233,16 @@ class MainPage extends Component {
     });
     this.props.handleClose();
     // return questions;
+  }
+  ShuffleArray(array) {
+    let i = array.length - 1;
+    for (; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return array;
   }
 
   handleAnswerChange(ans) {
@@ -268,9 +273,11 @@ class MainPage extends Component {
       this.setState({
         currentquestionid: this.state.currentquestionid + 1,
         currentAnswer: "",
+        questionNo: this.state.questionNo + 1,
       });
       console.log(ans);
       this.handleScore();
+      console.log(this.state.questionNo);
     }
   }
   handleSubmit() {
@@ -285,14 +292,22 @@ class MainPage extends Component {
       <div className="mainPage">
         <div style={{ display: `${this.state.admin ? "none" : "block"}` }}>
           <div className="mainText">
-            <Typography variant="h6">Scholarship Test</Typography>
+            <Typography variant="h6">
+              Mira-bhayandar Scholarship Test
+            </Typography>
           </div>
           <div className="tabs">
             <QuestionTab
+              questionNo={this.state.questionNo}
               question={questions[this.state.currentquestionid]}
               handleAnswerChange={this.handleAnswerChange}
+              ShuffleArray={this.ShuffleArray}
             />
-            <Timer minutes={this.state.minutes} seconds={this.state.seconds} />
+            <Timer
+              style={{ marginRight: "20px" }}
+              minutes={this.state.minutes}
+              seconds={this.state.seconds}
+            />
           </div>
           <Dialog
             style={{
@@ -370,7 +385,7 @@ class MainPage extends Component {
                 style={{
                   float: "right",
                   background: "#6FCF97",
-                  margin: "0 0 0 20px",
+                  margin: "0 80px 0 20px",
                   color: "#fff",
                 }}
                 variant="contained"
