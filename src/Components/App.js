@@ -17,9 +17,9 @@ class App extends Component {
       gender: "",
       login: true,
       details: [],
-      login: false,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleData = this.handleData.bind(this);
   }
 
   handleInputChange(value) {
@@ -42,6 +42,18 @@ class App extends Component {
       });
     }
   };
+  handleData(mark) {
+    var data = this.state.details;
+    data.push({
+      name: this.state.name,
+      phone_num: this.state.phone_num,
+      email: this.state.email,
+      parent_num: this.state.parent_num,
+      address: this.state.address,
+      gender: this.state.gender,
+      marks:mark
+    });
+  }
   render() {
     return (
       <div style={{ margin: "0px", height: "100%" }}>
@@ -58,6 +70,7 @@ class App extends Component {
           detail={this.state.details}
           handleInputChange={this.handleInputChange}
           handleClose={this.handleClose}
+          handleData={this.handleData}
         />
       </div>
     );
