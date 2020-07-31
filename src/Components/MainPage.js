@@ -32,9 +32,9 @@ var questions = [
   {
     id: 1,
     question:
-      "If PA and PB are tangents, From P to a circle with center O. If Angle AOB = 130 deg then find Angle APB ",
-    correctanswer: "40 deg",
-    answers: ["40 deg", "55 deg", "50 deg", "60 deg"],
+      "If PA and PB tangents, From P to a circle with center O. If ∠AOB = 130° deg then find ∠APB ",
+    correctanswer: "40°",
+    answers: ["40°", "55°", "50°", "60°"],
   },
   {
     id: 2,
@@ -52,7 +52,7 @@ var questions = [
   },
   {
     id: 4,
-    question: "Sin^2 60deg + 2Tan^2 45deg - cos^2 30deg",
+    question: "Sin^2 60° + 2Tan^2 45° - cos^2 30°",
     correctanswer: "",
     answers: ["a", "b", "c", "d"],
   },
@@ -173,6 +173,7 @@ class MainPage extends Component {
       minutes: 30,
       seconds: 0,
       currentAnswer: "",
+      questionNo: 1,
       currentquestionid: 0,
       marks: 0,
       answers: [],
@@ -185,6 +186,7 @@ class MainPage extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleScore = this.handleScore.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.ShuffleArray = this.ShuffleArray.bind(this);
   }
   componentDidMount() {
     this.myInterval = setInterval(() => {
@@ -232,6 +234,16 @@ class MainPage extends Component {
     this.props.handleClose();
     // return questions;
   }
+  ShuffleArray(array) {
+    let i = array.length - 1;
+    for (; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return array;
+  }
 
   handleAnswerChange(ans) {
     this.setState({
@@ -268,11 +280,13 @@ class MainPage extends Component {
       this.setState({
         currentquestionid: this.state.currentquestionid + 1,
         currentAnswer: "",
+        questionNo: this.state.questionNo + 1,
       });
       console.log(ans);
     }
     if (e.currentTarget.value === "next" && this.state.currentAnswer) {
       this.handleScore();
+      console.log(this.state.questionNo);
     }
   }
   handleSubmit() {
@@ -290,15 +304,23 @@ class MainPage extends Component {
       <div className="mainPage">
         <div style={{ display: `${this.state.admin ? "none" : "block"}` }}>
           <div className="mainText">
-            <Typography variant="h6"> Scholarship Test </Typography>{" "}
-          </div>{" "}
+            <Typography variant="h6">
+              Mira-bhayandar Scholarship Test
+            </Typography>
+          </div>
           <div className="tabs">
             <QuestionTab
+              questionNo={this.state.questionNo}
               question={questions[this.state.currentquestionid]}
               handleAnswerChange={this.handleAnswerChange}
-            />{" "}
-            <Timer minutes={this.state.minutes} seconds={this.state.seconds} />{" "}
-          </div>{" "}
+              ShuffleArray={this.ShuffleArray}
+            />
+            <Timer
+              style={{ marginRight: "20px" }}
+              minutes={this.state.minutes}
+              seconds={this.state.seconds}
+            />
+          </div>
           <Dialog
             style={{
               backgroundColor: "rgba(0, 0, 0, 0.95)",
@@ -374,7 +396,7 @@ class MainPage extends Component {
                 style={{
                   float: "right",
                   background: "#6FCF97",
-                  margin: "0 0 0 20px",
+                  margin: "0 80px 0 20px",
                   color: "#fff",
                 }}
                 variant="contained"

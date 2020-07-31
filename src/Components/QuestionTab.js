@@ -6,6 +6,7 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
+  Typography,
 } from "@material-ui/core";
 
 import "../CSS/questionTab.css";
@@ -20,10 +21,16 @@ class QuestionTab extends Component {
     this.props.handleAnswerChange(e.target.value);
   }
   render() {
+    const shuffleQuestions = this.props.ShuffleArray(this.props.question);
     return (
       <div>
         <div className="question">
-          {this.props.question.id + 1 + "."} {this.props.question.question}
+          {this.props.questionNo + "."}
+          {this.props.question.question}
+          {this.props.question.question}
+          {/* {shuffleQuestions.map((question) => {
+            return <Typography variant="h6">{question.question}</Typography>;
+          })} */}
         </div>
 
         <form className="questionForm">
