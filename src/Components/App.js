@@ -15,7 +15,7 @@ class App extends Component {
       parent_num: "",
       address: "",
       gender: "",
-      login: false,
+      login: true,
       details: [],
     };
     this.handleInputChange = this.handleInputChange.bind(this);
