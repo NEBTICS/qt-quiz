@@ -25,41 +25,41 @@ import {
 var questions = [
   {
     id: 0,
-    question: "For what value of 't' is X= 2/3 a solution of 7X^2 + tX - 3",
-    correctanswer: "-6",
+    question: "For what value of 't' is X= 2/3 a solution of 7X\u00B2 + tX - 3",
+    correctanswer: "-1/6",
     answers: ["-6", "-1/6", "1/6", "6"],
   },
   {
     id: 1,
     question:
       "If PA and PB tangents, From P to a circle with center O. If ∠AOB = 130° deg then find ∠APB ",
-    correctanswer: "40°",
+    correctanswer: "50°",
     answers: ["40°", "55°", "50°", "60°"],
   },
   {
     id: 2,
     question:
       "If 7th and 13th terms are 34 & 64 respectively, then its 18th term is  ",
-    correctanswer: "",
+    correctanswer: "89",
     answers: ["87", "88", "89", "91"],
   },
   {
     id: 3,
     question:
       "The probability of a leap year selected at random contain 53 sundays is ",
-    correctanswer: "",
+    correctanswer: "53/366",
     answers: ["1/7", "53/366", "2/7", "53/365"],
   },
   {
     id: 4,
-    question: "Sin^2 60° + 2Tan^2 45° - cos^2 30°",
-    correctanswer: "",
-    answers: ["a", "b", "c", "d"],
+    question: "Sin\u00B2 60° + 2Tan\u00B2 45° - cos\u00B2 30°",
+    correctanswer: "2",
+    answers: ["3", "4", "2", "1"],
   },
   {
     id: 5,
     question: "What is the area of semi-circle of raduis 5cm ?",
-    correctanswer: "78.cm",
+    correctanswer: "78.57cm",
     answers: ["78.57cm", "71.42cm", "63.18cm", "79.86cm"],
   },
   {
@@ -71,21 +71,21 @@ var questions = [
   },
   {
     id: 7,
-    question: "What is the nature of root of quadratic equation 2X^2 + 4X = 5 ",
-    correctanswer: "",
+    question: "What is the nature of root of quadratic equation 2X\u00B2 + 4X = 5 ",
+    correctanswer: "Real & unequal",
     answers: ["Real & equal", "Real & unequal", "Not real"],
   },
   {
     id: 8,
     question:
       "Hypotenuse is 25cm ,and base is 7cm .What is the height of the triangle?",
-    correctanswer: "",
+    correctanswer: "24cm",
     answers: ["20cm", "22cm", "24cm", "21cm"],
   },
   {
     id: 9,
     question: "The given points lies on which quadrant or axis (2,-3) , (0,-4)",
-    correctanswer: "",
+    correctanswer: "IV",
     answers: ["I", "II", "III", "IV"],
   },
   {
@@ -165,7 +165,13 @@ var questions = [
     answers: ["Anthracite", "Peat", "Bituminous", "Lignite"],
   },
 ];
+function shuffle(array) {
+    array.sort(()=>{
+    return 0.5-Math.random()
+  })
+}
 
+shuffle(questions);
 class MainPage extends Component {
   constructor(props) {
     super(props);
@@ -186,7 +192,6 @@ class MainPage extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleScore = this.handleScore.bind(this);
     this.handleClose = this.handleClose.bind(this);
-    this.ShuffleArray = this.ShuffleArray.bind(this);
   }
   componentDidMount() {
     this.myInterval = setInterval(() => {
@@ -224,8 +229,7 @@ class MainPage extends Component {
     clearInterval(this.myInterval);
   }
 
-  handleResetTimer(questions) {
-    console.log(questions);
+  handleResetTimer() {
 
     this.setState({
       minutes: 30,
@@ -234,17 +238,6 @@ class MainPage extends Component {
     this.props.handleClose();
     // return questions;
   }
-  ShuffleArray(array) {
-    let i = array.length - 1;
-    for (; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
-    }
-    return array;
-  }
-
   handleAnswerChange(ans) {
     this.setState({
       currentAnswer: ans,
@@ -252,9 +245,7 @@ class MainPage extends Component {
   }
 
   handleScore() {
-    console.log(this.state.currentAnswer);
-    console.log(questions[this.state.currentquestionid].correctanswer);
-
+  
     if (
       this.state.currentAnswer ===
       questions[this.state.currentquestionid].correctanswer
@@ -266,9 +257,6 @@ class MainPage extends Component {
   }
 
   handleNext(e) {
-    console.log(this.state.marks);
-
-    console.log(e.currentTarget.value);
     if (e.currentTarget.value === "next" && this.state.currentAnswer === "") {
       alert("Please select one of the option");
     } else {
@@ -282,15 +270,13 @@ class MainPage extends Component {
         currentAnswer: "",
         questionNo: this.state.questionNo + 1,
       });
-      console.log(ans);
     }
     if (e.currentTarget.value === "next" && this.state.currentAnswer) {
       this.handleScore();
-      console.log(this.state.questionNo);
+     
     }
   }
   handleSubmit() {
-    console.log("Submit btn was pressed");
     this.setState({
       endQuiz: true,
     });
@@ -313,7 +299,6 @@ class MainPage extends Component {
               questionNo={this.state.questionNo}
               question={questions[this.state.currentquestionid]}
               handleAnswerChange={this.handleAnswerChange}
-              ShuffleArray={this.ShuffleArray}
             />
             <Timer
               style={{ marginRight: "20px" }}
