@@ -2,6 +2,8 @@
 
 import React, { Component } from "react";
 
+import emailjs from "emailjs-com";
+
 import Navbar from "./Navbar";
 import MainPage from "./MainPage";
 // import history from "./history";
@@ -20,6 +22,7 @@ class App extends Component {
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleData = this.handleData.bind(this);
+    this.handleSendData = this.handleSendData.bind(this);
   }
 
   handleInputChange(value) {
@@ -44,7 +47,7 @@ class App extends Component {
   };
   handleData(mark) {
     var data = this.state.details;
-    data.push({
+    data = {
       name: this.state.name,
       phone_num: this.state.phone_num,
       email: this.state.email,
@@ -52,7 +55,37 @@ class App extends Component {
       address: this.state.address,
       gender: this.state.gender,
       marks: mark,
+<<<<<<< HEAD
+=======
+    };
+    this.setState({
+      details: data,
+>>>>>>> f079a9429f76a1abef8dfb540856933a0a6ea55d
     });
+  }
+  handleSendData(mark) {
+    let templateParams = {
+      name: this.state.name,
+      phone_num: this.state.phone_num,
+      email: this.state.email,
+      parent_num: this.state.parent_num,
+      address: this.state.address,
+      gender: this.state.gender,
+      marks: mark,
+    };
+    emailjs
+      .send("gmail", "gt_quiz", templateParams, "user_1Tx080BdBbgp30iC4UKeo")
+      .then((res) => {
+        console.log("Email successfully sent!", templateParams.name);
+      })
+      // Handle errors here however you like, or use a React error boundary
+      .catch((err) => {
+        console.error(
+          "Oh well, you failed. Here some thoughts on the error that occured:",
+          err
+        );
+        alert("Something went wrong ,Can you retake the test again");
+      });
   }
   render() {
     return (
@@ -71,6 +104,7 @@ class App extends Component {
           handleInputChange={this.handleInputChange}
           handleClose={this.handleClose}
           handleData={this.handleData}
+          handleSendData={this.handleSendData}
         />
       </div>
     );

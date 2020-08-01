@@ -78,6 +78,7 @@ class Form extends React.Component {
                 variant="outlined"
                 label="Phone no"
                 value={this.props.phone_num}
+                // error={this.props.phone_num.length!==10}
                 name="phone_num"
                 onChange={(e) => {
                   this.handleInputChange(e);

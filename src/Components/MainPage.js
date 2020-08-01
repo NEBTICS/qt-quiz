@@ -275,6 +275,7 @@ class MainPage extends Component {
     }
   }
   handleSubmit() {
+    this.props.handleSendData(this.state.marks)
     this.setState({
       endQuiz: true,
     });
@@ -378,7 +379,7 @@ class MainPage extends Component {
                 onClick={(e) => this.handleNext(e)}
                 value="skip"
               >
-                Skip{" "}
+                Pass{" "}
               </Button>{" "}
               <Button
                 style={{
