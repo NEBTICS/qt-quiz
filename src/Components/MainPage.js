@@ -32,7 +32,7 @@ var questions = [
   {
     id: 1,
     question:
-      "If PA and PB tangents, From P to a circle with center O. If ∠AOB = 130° deg then find ∠APB ",
+      "If PA and PB tangents, From P to a circle with center O. If ∠AOB = 130° then find ∠APB ",
     correctanswer: "50°",
     answers: ["40°", "55°", "50°", "60°"],
   },
@@ -71,7 +71,8 @@ var questions = [
   },
   {
     id: 7,
-    question: "What is the nature of root of quadratic equation 2X\u00B2 + 4X = 5 ",
+    question:
+      "What is the nature of root of quadratic equation 2X\u00B2 + 4X = 5 ",
     correctanswer: "Real & unequal",
     answers: ["Real & equal", "Real & unequal", "Not real"],
   },
@@ -86,7 +87,7 @@ var questions = [
     id: 9,
     question: "The given points lies on which quadrant or axis (2,-3) , (0,-4)",
     correctanswer: "IV",
-    answers: ["I", "II", "III", "IV"],
+    answers: ["I Quadrant", "II Quadrant", "III Quadrant", "IV Quadrant"],
   },
   {
     id: 10,
@@ -166,9 +167,9 @@ var questions = [
   },
 ];
 function shuffle(array) {
-    array.sort(()=>{
-    return 0.5-Math.random()
-  })
+  array.sort(() => {
+    return 0.5 - Math.random();
+  });
 }
 
 shuffle(questions);
@@ -230,7 +231,6 @@ class MainPage extends Component {
   }
 
   handleResetTimer() {
-
     this.setState({
       minutes: 30,
       seconds: 0,
@@ -245,7 +245,6 @@ class MainPage extends Component {
   }
 
   handleScore() {
-  
     if (
       this.state.currentAnswer ===
       questions[this.state.currentquestionid].correctanswer
@@ -273,7 +272,6 @@ class MainPage extends Component {
     }
     if (e.currentTarget.value === "next" && this.state.currentAnswer) {
       this.handleScore();
-     
     }
   }
   handleSubmit() {
@@ -289,6 +287,11 @@ class MainPage extends Component {
     return (
       <div className="mainPage">
         <div style={{ display: `${this.state.admin ? "none" : "block"}` }}>
+          <div className="sheading">
+            <Typography variant="h6" className="heading">
+              ...Join GET Tutorials for XI-XII, JEE, NEET and MHT-CET
+            </Typography>
+          </div>
           <div className="mainText">
             <Typography variant="h6">
               Mira-bhayandar Scholarship Test

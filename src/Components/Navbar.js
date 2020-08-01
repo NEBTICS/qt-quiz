@@ -41,10 +41,7 @@ class Navbar extends Component {
                 width="50px"
                 style={{ margin: "0 20px 0 0" }}
               />
-              <Typography
-                variant="h6"
-                style={{ fontWeight: "800", fontStyle: "italic" }}
-              >
+              <Typography variant="h6" style={{ fontWeight: "800" }}>
                 GET TUTORIALS
               </Typography>
             </div>

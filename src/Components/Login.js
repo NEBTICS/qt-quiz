@@ -10,6 +10,7 @@ import {
   DialogActions,
   Dialog,
   DialogContent,
+  Typography,
 } from "@material-ui/core";
 
 class Form extends React.Component {
@@ -41,12 +42,18 @@ class Form extends React.Component {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              color: "#6FCF97",
+              color: "#EB5757",
               fontWeight: "800",
               paddingBottom: "0",
+              textAlign: "center",
             }}
           >
-            Enter details for test
+            <Typography variant="h5" style={{ fontWeight: "bold" }}>
+              GET TUTORIALS
+            </Typography>
+            <Typography variant="h6" style={{ fontWeight: "semibold" }}>
+              Enter details for test
+            </Typography>
           </DialogTitle>
           <DialogContent
             className="dialogContent"
@@ -126,7 +133,7 @@ class Form extends React.Component {
           >
             <Button
               onClick={this.props.handleClose}
-              style={{ backgroundColor: "#6FCF97", color: "white" }}
+              style={{ backgroundColor: "#EB5757", color: "white" }}
             >
               Start Test
             </Button>

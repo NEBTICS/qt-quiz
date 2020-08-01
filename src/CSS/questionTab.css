@@ -5,3 +5,11 @@
 .questionForm {
   color: #6fcf97;
 }
+@media only screen and (max-width: 600px) {
+  .question {
+    margin-top: 20px;
+  }
+  .timeText {
+    display: none;
+  }
+}

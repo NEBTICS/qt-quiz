@@ -15,7 +15,7 @@ class App extends Component {
       parent_num: "",
       address: "",
       gender: "",
-      login: false,
+      login: true,
       details: [],
     };
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -51,7 +51,7 @@ class App extends Component {
       parent_num: this.state.parent_num,
       address: this.state.address,
       gender: this.state.gender,
-      marks:mark
+      marks: mark,
     });
   }
   render() {

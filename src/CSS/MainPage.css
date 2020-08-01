@@ -16,3 +16,19 @@
   display: flex;
   justify-content: space-between;
 }
+@media only screen and (min-width: 600px) {
+  .sheading {
+    display: none;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .heading {
+    width: 100%;
+    border-radius: 4px;
+    text-align: center;
+    color: #6fcf97;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

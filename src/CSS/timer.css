@@ -18,6 +18,7 @@
   .timer {
     background-color: #202124;
     width: 150px;
+    align-items: flex-end;
   }
   .timeText {
     display: none;
