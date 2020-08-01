@@ -86,7 +86,7 @@ var questions = [
   {
     id: 9,
     question: "The given points lies on which quadrant or axis (2,-3) , (0,-4)",
-    correctanswer: "IV",
+    correctanswer: "IV Quadrant",
     answers: ["I Quadrant", "II Quadrant", "III Quadrant", "IV Quadrant"],
   },
   {
@@ -275,7 +275,7 @@ class MainPage extends Component {
     }
   }
   handleSubmit() {
-    this.props.handleSendData(this.state.marks)
+    this.props.handleSendData(this.state.marks);
     this.setState({
       endQuiz: true,
     });
@@ -289,12 +289,16 @@ class MainPage extends Component {
       <div className="mainPage">
         <div style={{ display: `${this.state.admin ? "none" : "block"}` }}>
           <div className="sheading">
-            <Typography variant="h6" className="heading">
-              ...Join GET Tutorials for XI-XII, JEE, NEET and MHT-CET
+            <Typography
+              variant="h6"
+              className="heading"
+              style={{ fontWeight: "bold" }}
+            >
+              Join GET Tutorials for XI-XII, JEE, NEET and MHT-CET
             </Typography>
           </div>
           <div className="mainText">
-            <Typography variant="h6">
+            <Typography variant="h5">
               Mira-bhayandar Scholarship Test
             </Typography>
           </div>
