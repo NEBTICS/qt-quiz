@@ -55,12 +55,9 @@ class App extends Component {
       address: this.state.address,
       gender: this.state.gender,
       marks: mark,
-<<<<<<< HEAD
-=======
     };
     this.setState({
       details: data,
->>>>>>> f079a9429f76a1abef8dfb540856933a0a6ea55d
     });
   }
   handleSendData(mark) {
