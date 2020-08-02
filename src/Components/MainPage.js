@@ -32,7 +32,7 @@ var questions = [
   {
     id: 1,
     question:
-      "If PA and PB tangents, From P to a circle with center O. If ∠AOB = 130° then find ∠APB ",
+      "If PA and PB tangents, From P to a circle with center O. If ∠AOB = 130° deg then find ∠APB ",
     correctanswer: "50°",
     answers: ["40°", "55°", "50°", "60°"],
   },
@@ -86,8 +86,8 @@ var questions = [
   {
     id: 9,
     question: "The given points lies on which quadrant or axis (2,-3) , (0,-4)",
-    correctanswer: "IV Quadrant",
-    answers: ["I Quadrant", "II Quadrant", "III Quadrant", "IV Quadrant"],
+    correctanswer: "IV",
+    answers: ["I", "II", "III", "IV"],
   },
   {
     id: 10,
@@ -244,7 +244,7 @@ class MainPage extends Component {
     });
   }
 
-  handleScore() {
+  handleScore(value) {
     if (
       this.state.currentAnswer ===
       questions[this.state.currentquestionid].correctanswer
@@ -252,6 +252,11 @@ class MainPage extends Component {
       this.setState({
         marks: this.state.marks + 1,
       });
+      if (value === "submit") {
+        this.props.handleSendData(this.state.marks + 1);
+      }
+    } else {
+      this.props.handleSendData(this.state.marks );
     }
   }
 
@@ -271,14 +276,24 @@ class MainPage extends Component {
       });
     }
     if (e.currentTarget.value === "next" && this.state.currentAnswer) {
-      this.handleScore();
+      this.handleScore("next");
     }
   }
-  handleSubmit() {
-    this.props.handleSendData(this.state.marks);
-    this.setState({
-      endQuiz: true,
-    });
+  handleSubmit(e) {
+    if (this.state.currentAnswer === "") {
+      alert("Please select one of the option");
+    } else {
+      var ans = this.state.answers;
+      ans.push({
+        ans: this.state.currentAnswer,
+        questionid: this.state.currentquestionid,
+      });
+      this.handleScore("submit");
+
+      this.setState({
+        endQuiz: true,
+      });
+    }
   }
 
   handleClose() {
@@ -288,17 +303,8 @@ class MainPage extends Component {
     return (
       <div className="mainPage">
         <div style={{ display: `${this.state.admin ? "none" : "block"}` }}>
-          <div className="sheading">
-            <Typography
-              variant="h6"
-              className="heading"
-              style={{ fontWeight: "bold" }}
-            >
-              Join GET Tutorials for XI-XII, JEE, NEET and MHT-CET
-            </Typography>
-          </div>
           <div className="mainText">
-            <Typography variant="h5">
+            <Typography variant="h6">
               Mira-bhayandar Scholarship Test
             </Typography>
           </div>
