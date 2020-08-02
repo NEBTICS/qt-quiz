@@ -337,7 +337,6 @@ class MainPage extends Component {
                 color: "#EB5757",
                 fontWeight: "800",
                 paddingBottom: "0",
-                overflow: "initial",
               }}
             >
               <div style={{ fontWeight: "700", fontSize: "32px" }}>

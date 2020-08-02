@@ -62,6 +62,7 @@ class Form extends React.Component {
               height: "300px",
               display: "flex",
               justifyContent: "space-evenly",
+              overflowY: "initial",
             }}
           >
             <div className="inputfields ">
