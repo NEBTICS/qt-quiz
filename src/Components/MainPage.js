@@ -86,8 +86,8 @@ var questions = [
   {
     id: 9,
     question: "The given points lies on which quadrant or axis (2,-3) , (0,-4)",
-    correctanswer: "IV",
-    answers: ["I", "II", "III", "IV"],
+    correctanswer: "IV Quadrant",
+    answers: ["I Quadrant", "II Quadrant", "III Quadrant", "IV Quadrant"],
   },
   {
     id: 10,
@@ -184,7 +184,7 @@ class MainPage extends Component {
       currentquestionid: 0,
       marks: 0,
       answers: [],
-      endQuiz: true,
+      endQuiz: false,
       admin: false,
     };
     this.handleAnswerChange = this.handleAnswerChange.bind(this);
@@ -256,7 +256,7 @@ class MainPage extends Component {
         this.props.handleSendData(this.state.marks + 1);
       }
     } else {
-      this.props.handleSendData(this.state.marks );
+      this.props.handleSendData(this.state.marks);
     }
   }
 
@@ -355,7 +355,7 @@ class MainPage extends Component {
             >
               <Typography
                 variant="h6"
-                style={{ fontWeight: "bolder", fontSize: "28px" }}
+                style={{ fontWeight: "bolder", fontSize: "24px" }}
               >
                 {" "}
                 Thanks for participating{" "}
