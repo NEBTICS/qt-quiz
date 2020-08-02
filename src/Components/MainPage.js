@@ -184,7 +184,7 @@ class MainPage extends Component {
       currentquestionid: 0,
       marks: 0,
       answers: [],
-      endQuiz: false,
+      endQuiz: true,
       admin: false,
     };
     this.handleAnswerChange = this.handleAnswerChange.bind(this);
@@ -331,11 +331,14 @@ class MainPage extends Component {
                 color: "#EB5757",
                 fontWeight: "800",
                 paddingBottom: "0",
+                overflow: "initial",
               }}
             >
-              {this.state.minutes === 0 && this.state.seconds === "000"
-                ? "Time's Up..!!"
-                : "Well Done..!!"}{" "}
+              <div style={{ fontWeight: "700", fontSize: "32px" }}>
+                {this.state.minutes === 0 && this.state.seconds === "000"
+                  ? "Time's Up..!!"
+                  : "Well Done..!!"}{" "}
+              </div>
             </DialogTitle>{" "}
             <DialogContent
               style={{
@@ -344,7 +347,13 @@ class MainPage extends Component {
                 color: "#6FCF97",
               }}
             >
-              <Typography variant="h6"> Thanks for participating </Typography>{" "}
+              <Typography
+                variant="h6"
+                style={{ fontWeight: "bolder", fontSize: "28px" }}
+              >
+                {" "}
+                Thanks for participating{" "}
+              </Typography>{" "}
             </DialogContent>{" "}
             <DialogActions
               style={{
@@ -355,7 +364,11 @@ class MainPage extends Component {
             >
               <Button
                 onClick={this.handleClose}
-                style={{ backgroundColor: "#EB5757", color: "white" }}
+                style={{
+                  backgroundColor: "#EB5757",
+                  color: "white",
+                  display: "none",
+                }}
               >
                 End Test{" "}
               </Button>{" "}
