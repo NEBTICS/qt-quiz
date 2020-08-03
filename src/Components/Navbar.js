@@ -42,7 +42,7 @@ class Navbar extends Component {
                 style={{ margin: "0 20px 0 0" }}
               />
               <Typography variant="h6" style={{ fontWeight: "800" }}>
-                GET TUTORIALS
+                GET Tutorials
               </Typography>
             </div>
             <div className="subHeading">

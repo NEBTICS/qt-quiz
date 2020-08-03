@@ -245,18 +245,21 @@ class MainPage extends Component {
   }
 
   handleScore(value) {
-    if (
-      this.state.currentAnswer ===
-      questions[this.state.currentquestionid].correctanswer
-    ) {
-      this.setState({
-        marks: this.state.marks + 1,
-      });
-      if (value === "submit") {
-        this.props.handleSendData(this.state.marks + 1);
-      }
-    } else {
-      this.props.handleSendData(this.state.marks);
+    // if (
+    //   this.state.currentAnswer ===
+    //   questions[this.state.currentquestionid].correctanswer
+    // ) {
+    //   this.setState({
+    //     marks: this.state.marks + 1,
+    //   });
+    //   if (value === "submit") {
+    //     this.props.handleSendData(this.state.marks + 1);
+    //   }
+    // } else if (value === "submit") {
+    //   this.props.handleSendData(this.state.marks);
+    // }
+    for (i=0;i<questions.length; i++ ){
+      if (questions[i].correctanswer==this.state.answer[questions[i]])
     }
   }
 
@@ -267,7 +270,7 @@ class MainPage extends Component {
       var ans = this.state.answers;
       ans.push({
         ans: this.state.currentAnswer,
-        questionid: this.state.currentquestionid,
+        questionid: questions[this.state.currentquestionid].id,
       });
       this.setState({
         currentquestionid: this.state.currentquestionid + 1,
@@ -275,9 +278,14 @@ class MainPage extends Component {
         questionNo: this.state.questionNo + 1,
       });
     }
-    if (e.currentTarget.value === "next" && this.state.currentAnswer) {
-      this.handleScore("next");
-    }
+  }
+
+  handlePrevious() {
+    this.setState({
+      currentquestionid: this.state.currentquestionid - 1,
+      currentAnswer: "",
+      questionNo: this.state.questionNo - 1,
+    });
   }
   handleSubmit(e) {
     if (this.state.currentAnswer === "") {
@@ -303,9 +311,20 @@ class MainPage extends Component {
     return (
       <div className="mainPage">
         <div style={{ display: `${this.state.admin ? "none" : "block"}` }}>
+          <div className="joinText">
+            <Typography
+              variant="h6"
+              style={{ fontSize: "16px", fontWeight: "700" }}
+            >
+              Join GET Tutorials for XI-XII, JEE, NEET and MHT-CET
+            </Typography>
+          </div>
           <div className="mainText">
-            <Typography variant="h6">
-              Mira-bhayandar Scholarship Test
+            <Typography
+              variant="h6"
+              style={{ fontSize: "20px", fontWeight: "700" }}
+            >
+              Mira-Bhayandar Scholarship Admission Test
             </Typography>
           </div>
           <div className="tabs">
@@ -396,12 +415,16 @@ class MainPage extends Component {
               }}
             >
               <Button
-                style={{ background: "#EB5757", color: "#fff" }}
+                style={{
+                  background: "#EB5757",
+                  color: "#fff",
+                  display: `${this.state.questionNo === 1 ? "none" : "block"}`,
+                }}
                 variant="contained"
-                onClick={(e) => this.handleNext(e)}
-                value="skip"
+                onClick={(e) => this.handlePrevious(e)}
+                value="Previous"
               >
-                Pass{" "}
+                Previous{" "}
               </Button>{" "}
               <Button
                 style={{

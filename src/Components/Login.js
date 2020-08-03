@@ -49,7 +49,7 @@ class Form extends React.Component {
             }}
           >
             <Typography variant="h5" style={{ fontWeight: "bolder" }}>
-              GET TUTORIALS (MBSAT)
+              GET TUTORIALS (MB-SAT)
             </Typography>
             <Typography variant="h6" style={{ fontWeight: "semibold" }}>
               Enter details for test

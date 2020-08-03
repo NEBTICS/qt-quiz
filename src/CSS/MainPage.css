@@ -10,11 +10,16 @@
   justify-content: center;
   padding-bottom: 20px;
   font-size: 28px;
+  text-align: center;
 }
 
 .tabs {
   display: flex;
   justify-content: space-between;
+}
+
+.joinText {
+  display: none;
 }
 @media only screen and (min-width: 600px) {
   .sheading {
@@ -32,7 +37,14 @@
     align-items: center;
   }
   .mainText {
-    color: #eb5757;
+    color: #6fcf97;
     margin-top: 10px;
+    text-align: center;
+  }
+  .joinText {
+    display: flex;
+    justify-content: center;
+    color: #eb5757;
+    text-align: center;
   }
 }

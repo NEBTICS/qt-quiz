@@ -17,7 +17,7 @@ class App extends Component {
       parent_num: "",
       address: "",
       gender: "",
-      login: true,
+      login: false,
       details: [],
     };
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -71,7 +71,7 @@ class App extends Component {
       marks: mark,
     };
     emailjs
-      .send("gmail", "gt_quiz", templateParams, "user_1Tx080BdBbgp30iC4UKeo")
+      .send("gmail", "g_quiz", templateParams, "user_1Tx080BdBbgp30iC4UKeo")
       .then((res) => {
         console.log("Email successfully sent!", templateParams.name);
       })
