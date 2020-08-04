@@ -244,7 +244,7 @@ class MainPage extends Component {
     });
   }
 
-  handleScore(value) {
+  handleScore() {
     // if (
     //   this.state.currentAnswer ===
     //   questions[this.state.currentquestionid].correctanswer
@@ -258,26 +258,46 @@ class MainPage extends Component {
     // } else if (value === "submit") {
     //   this.props.handleSendData(this.state.marks);
     // }
-    for (i=0;i<questions.length; i++ ){
-      if (questions[i].correctanswer==this.state.answer[questions[i]])
-    }
+    // for (i=0;i<questions.length; i++ ){
+    //   if (questions[i].correctanswer==this.state.answer[questions[i]])
+    // }
+    var totalMarks = this.state.answers.filter((ans) => ans.status === true)
+      .length;
+    this.setState({
+      marks: totalMarks,
+    });
+    this.props.handleSendData(totalMarks);
+    console.log(this.state.answers.filter((ans) => ans.status === true).length);
   }
 
-  handleNext(e) {
-    if (e.currentTarget.value === "next" && this.state.currentAnswer === "") {
-      alert("Please select one of the option");
-    } else {
-      var ans = this.state.answers;
-      ans.push({
-        ans: this.state.currentAnswer,
+  handleNext() {
+    // if (this.state.currentAnswer === "") {
+    //   alert("Please select one of the option");
+    // } else {
+      var answer = this.state.answers;
+      let idx = answer.findIndex(
+        (ans) => ans.questionid === questions[this.state.currentquestionid].id
+      );
+      var ans = {
+        selectedAns: this.state.currentAnswer,
         questionid: questions[this.state.currentquestionid].id,
-      });
+        correctans: questions[this.state.currentquestionid].correctanswer,
+        status:
+          this.state.currentAnswer ===
+          questions[this.state.currentquestionid].correctanswer,
+      };
+      if (idx >= 0) {
+        answer[idx] = ans;
+      } else {
+        answer.push(ans);
+      }
       this.setState({
         currentquestionid: this.state.currentquestionid + 1,
         currentAnswer: "",
+        answers: answer,
         questionNo: this.state.questionNo + 1,
       });
-    }
+    // }
   }
 
   handlePrevious() {
@@ -293,10 +313,14 @@ class MainPage extends Component {
     } else {
       var ans = this.state.answers;
       ans.push({
-        ans: this.state.currentAnswer,
-        questionid: this.state.currentquestionid,
+        selectedAns: this.state.currentAnswer,
+        questionid: questions[this.state.currentquestionid].id,
+        correctans: questions[this.state.currentquestionid].correctanswer,
+        status:
+          this.state.currentAnswer ===
+          questions[this.state.currentquestionid].correctanswer,
       });
-      this.handleScore("submit");
+      this.handleScore();
 
       this.setState({
         endQuiz: true,
@@ -373,7 +397,7 @@ class MainPage extends Component {
             >
               <Typography
                 variant="h6"
-                style={{ fontWeight: "bolder", fontSize: "24px" }}
+                style={{ fontWeight: "bolder", fontSize: "22px" }}
               >
                 {" "}
                 Thanks for participating{" "}
@@ -399,13 +423,29 @@ class MainPage extends Component {
             </DialogActions>{" "}
           </Dialog>
           {this.state.currentquestionid === 19 ? (
-            <Button
-              style={{ float: "right", background: "#6FCF97", color: "#fff" }}
-              variant="contained"
-              onClick={this.handleSubmit}
-            >
-              Submit{" "}
-            </Button>
+            <div style={{
+              float:"right",display:"flex"}
+            }>
+              <Button
+                style={{
+                  background: "#EB5757",
+                  color: "#fff",
+                  margin:"0 20px"
+                }}
+                variant="contained"
+                onClick={(e) => this.handlePrevious(e)}
+                value="Previous"
+              >
+                Previous{" "}
+              </Button>
+              <Button
+                style={{ background: "#6FCF97", color: "#fff" }}
+                variant="contained"
+                onClick={this.handleSubmit}
+              >
+                Submit{" "}
+              </Button>
+            </div>
           ) : (
             <div
               style={{
