@@ -48,7 +48,7 @@ class Form extends React.Component {
               textAlign: "center",
             }}
           >
-            <Typography variant="h5" style={{ fontWeight: "bolder" }}>
+            <Typography variant="h6" style={{ fontWeight: "bolder" }}>
               GET TUTORIALS (MB-SAT)
             </Typography>
             <Typography variant="h6" style={{ fontWeight: "semibold" }}>

@@ -6,6 +6,7 @@ import emailjs from "emailjs-com";
 
 import Navbar from "./Navbar";
 import MainPage from "./MainPage";
+
 // import history from "./history";
 class App extends Component {
   constructor(props) {

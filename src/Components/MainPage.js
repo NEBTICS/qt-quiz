@@ -274,29 +274,29 @@ class MainPage extends Component {
     // if (this.state.currentAnswer === "") {
     //   alert("Please select one of the option");
     // } else {
-      var answer = this.state.answers;
-      let idx = answer.findIndex(
-        (ans) => ans.questionid === questions[this.state.currentquestionid].id
-      );
-      var ans = {
-        selectedAns: this.state.currentAnswer,
-        questionid: questions[this.state.currentquestionid].id,
-        correctans: questions[this.state.currentquestionid].correctanswer,
-        status:
-          this.state.currentAnswer ===
-          questions[this.state.currentquestionid].correctanswer,
-      };
-      if (idx >= 0) {
-        answer[idx] = ans;
-      } else {
-        answer.push(ans);
-      }
-      this.setState({
-        currentquestionid: this.state.currentquestionid + 1,
-        currentAnswer: "",
-        answers: answer,
-        questionNo: this.state.questionNo + 1,
-      });
+    var answer = this.state.answers;
+    let idx = answer.findIndex(
+      (ans) => ans.questionid === questions[this.state.currentquestionid].id
+    );
+    var ans = {
+      selectedAns: this.state.currentAnswer,
+      questionid: questions[this.state.currentquestionid].id,
+      correctans: questions[this.state.currentquestionid].correctanswer,
+      status:
+        this.state.currentAnswer ===
+        questions[this.state.currentquestionid].correctanswer,
+    };
+    if (idx >= 0) {
+      answer[idx] = ans;
+    } else {
+      answer.push(ans);
+    }
+    this.setState({
+      currentquestionid: this.state.currentquestionid + 1,
+      currentAnswer: "",
+      answers: answer,
+      questionNo: this.state.questionNo + 1,
+    });
     // }
   }
 
@@ -334,7 +334,8 @@ class MainPage extends Component {
   render() {
     return (
       <div className="mainPage">
-        <div style={{ display: `${this.state.admin ? "none" : "block"}` }}>
+        {/* style={{ display: `${this.state.login ? "none" : "block"}` }} */}
+        <div>
           <div className="joinText">
             <Typography
               variant="h6"
@@ -423,14 +424,17 @@ class MainPage extends Component {
             </DialogActions>{" "}
           </Dialog>
           {this.state.currentquestionid === 19 ? (
-            <div style={{
-              float:"right",display:"flex"}
-            }>
+            <div
+              style={{
+                float: "right",
+                display: "flex",
+              }}
+            >
               <Button
                 style={{
                   background: "#EB5757",
                   color: "#fff",
-                  margin:"0 20px"
+                  margin: "0 20px",
                 }}
                 variant="contained"
                 onClick={(e) => this.handlePrevious(e)}

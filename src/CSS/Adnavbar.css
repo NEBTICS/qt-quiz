@@ -1,0 +1,26 @@
+.gtlogo {
+  width: 60px;
+  margin-top: 20px;
+}
+.handshaking {
+  width: 100px;
+}
+
+.iitainslogo {
+  width: 150px;
+}
+
+@media only screen and (max-width: 600px) {
+  .gtlogo {
+    width: 50px;
+    margin-top: 20px;
+  }
+  .handshaking {
+    width: 50px;
+    margin: 0px;
+  }
+  .iitainslogo {
+    width: 100px;
+    margin: 0px;
+  }
+}

@@ -1,0 +1,24 @@
+.fullpage {
+  height: 100%;
+  background-color: #1d3557;
+}
+
+.heading {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 0px;
+  font-size: 28px;
+  text-align: center;
+}
+
+.subheading {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  font-size: 28px;
+  text-align: center;
+}
