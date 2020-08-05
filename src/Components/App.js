@@ -46,6 +46,7 @@ class App extends Component {
       });
     }
   };
+
   handleData(mark) {
     var data = this.state.details;
     data = {
@@ -96,6 +97,8 @@ class App extends Component {
           parent_num={this.state.parent_num}
           address={this.state.address}
           gender={this.state.gender}
+          admodal={this.state.admodal}
+          handleCloseAdmodal={this.handleCloseAdmodal}
           login={this.state.login}
           score={this.state.marks}
           detail={this.state.details}

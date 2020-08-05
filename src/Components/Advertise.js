@@ -43,7 +43,7 @@ class Advertise extends React.Component {
         <div className="subheading">
           <Typography variant="h6">MB-SAT</Typography>
           <Typography variant="h6">
-            From 7th of August to 12th of August{" "}
+            From 8th of August to 14th of August{" "}
           </Typography>
         </div>
         <div className="subheading">

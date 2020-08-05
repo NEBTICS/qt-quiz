@@ -13,6 +13,7 @@ import QuestionTab from "./QuestionTab.js";
 import Timer from "./Timer.js";
 import Login from "./Login";
 import Datadetail from "./DataDetail.js";
+import Admodal from "./Admodal";
 
 import {
   Button,
@@ -179,6 +180,7 @@ class MainPage extends Component {
     this.state = {
       minutes: 30,
       seconds: 0,
+      adseconds: 5,
       currentAnswer: "",
       questionNo: 1,
       currentquestionid: 0,
@@ -186,6 +188,7 @@ class MainPage extends Component {
       answers: [],
       endQuiz: false,
       admin: false,
+      admodal: false,
     };
     this.handleAnswerChange = this.handleAnswerChange.bind(this);
     this.handleNext = this.handleNext.bind(this);
@@ -193,6 +196,8 @@ class MainPage extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleScore = this.handleScore.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleCloseAdmodal = this.handleCloseAdmodal.bind(this);
+    this.handleAdtimer = this.handleAdtimer.bind(this);
   }
   componentDidMount() {
     this.myInterval = setInterval(() => {
@@ -234,10 +239,39 @@ class MainPage extends Component {
     this.setState({
       minutes: 30,
       seconds: 0,
+      admodal: true,
     });
     this.props.handleClose();
     // return questions;
   }
+  handleCloseAdmodal() {
+    this.handleResetTimer();
+    this.setState({
+      admodal: false,
+      adseconds: 0,
+    });
+  }
+  handleAdtimer() {
+    this.myInterval1 = setInterval(() => {
+      const { adseconds } = this.state;
+      if (adseconds > 0) {
+        this.setState(({ adseconds }) => ({
+          adseconds: adseconds - 1,
+        }));
+      }
+
+      if (adseconds === 0) {
+        this.handleResetTimer();
+        this.setState({
+          admodal: false,
+          adseconds: adseconds - 1,
+          seconds: 0,
+          minutes: 30,
+        });
+      }
+    }, 1000);
+  }
+
   handleAnswerChange(ans) {
     this.setState({
       currentAnswer: ans,
@@ -245,22 +279,6 @@ class MainPage extends Component {
   }
 
   handleScore() {
-    // if (
-    //   this.state.currentAnswer ===
-    //   questions[this.state.currentquestionid].correctanswer
-    // ) {
-    //   this.setState({
-    //     marks: this.state.marks + 1,
-    //   });
-    //   if (value === "submit") {
-    //     this.props.handleSendData(this.state.marks + 1);
-    //   }
-    // } else if (value === "submit") {
-    //   this.props.handleSendData(this.state.marks);
-    // }
-    // for (i=0;i<questions.length; i++ ){
-    //   if (questions[i].correctanswer==this.state.answer[questions[i]])
-    // }
     var totalMarks = this.state.answers.filter((ans) => ans.status === true)
       .length;
     this.setState({
@@ -271,9 +289,6 @@ class MainPage extends Component {
   }
 
   handleNext() {
-    // if (this.state.currentAnswer === "") {
-    //   alert("Please select one of the option");
-    // } else {
     var answer = this.state.answers;
     let idx = answer.findIndex(
       (ans) => ans.questionid === questions[this.state.currentquestionid].id
@@ -297,7 +312,6 @@ class MainPage extends Component {
       answers: answer,
       questionNo: this.state.questionNo + 1,
     });
-    // }
   }
 
   handlePrevious() {
@@ -334,8 +348,7 @@ class MainPage extends Component {
   render() {
     return (
       <div className="mainPage">
-        {/* style={{ display: `${this.state.login ? "none" : "block"}` }} */}
-        <div>
+        <div style={{ display: `${this.state.admin ? "none" : "block"}` }}>
           <div className="joinText">
             <Typography
               variant="h6"
@@ -485,6 +498,12 @@ class MainPage extends Component {
               </Button>{" "}
             </div>
           )}{" "}
+          <Admodal
+            admodal={this.state.admodal}
+            handleCloseAdmodal={this.handleCloseAdmodal}
+            handleAdtimer={this.handleAdtimer}
+            adseconds={this.state.adseconds}
+          />
           <Login
             name={this.props.name}
             email={this.props.email}

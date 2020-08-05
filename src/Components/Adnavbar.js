@@ -22,7 +22,6 @@ class ADnavbar extends React.Component {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              flexDirection: "column",
             }}
           >
             <div
@@ -33,9 +32,10 @@ class ADnavbar extends React.Component {
               }}
             >
               <img className="gtlogo" src={logo} alt="logo" />
+            </div>
+            <div>
               <Typography
                 variant="h4"
-                // className="navheading"
                 style={{
                   color: "#1d3557",
                   fontSize: "36px",
@@ -45,15 +45,12 @@ class ADnavbar extends React.Component {
               >
                 GET
               </Typography>
-            </div>
-            <div>
               <Typography
                 variant="h5"
                 style={{
                   color: "#1d3557",
                   fontSize: "36px",
                   fontWeight: "800",
-                  paddingLeft: "10px",
                 }}
               >
                 Tutorials
